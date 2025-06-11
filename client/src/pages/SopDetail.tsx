@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function SopDetail() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [sop, setSop] = useState<any>(null);
 
   useEffect(() => {

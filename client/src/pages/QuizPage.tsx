@@ -1,7 +1,11 @@
 import { useParams } from 'react-router-dom';
 
+interface RouteParams {
+  id: string;
+}
+
 function QuizPage() {
-  const { id } = useParams();
+  const { id } = useParams<RouteParams>();
 
   // This would eventually fetch quiz data for SOP id
   return (
