@@ -1,0 +1,54 @@
+.sop-navbar {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  border-radius: 0 0 2rem 2rem;
+  box-shadow: 0 4px 24px rgba(30,60,114,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.sop-navbar-container {
+  text-align: center;
+  position: relative;
+}
+
+.sop-navbar-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
+.sop-navbar-highlight {
+  color: #ffd700;
+}
+
+.sop-navbar-lead {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.sop-navbar-circle-left {
+  position: absolute;
+  top: 0;
+  left: -60px;
+  width: 180px;
+  height: 180px;
+  background: rgba(255,215,0,0.08);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.sop-navbar-circle-right {
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  z-index: 0;
+}
