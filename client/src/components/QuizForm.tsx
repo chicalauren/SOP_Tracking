@@ -14,7 +14,7 @@ type Question = {
 };
 
 function QuizForm() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<{ [questionId: string]: string[] }>({});
 
