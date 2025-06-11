@@ -13,15 +13,15 @@ const Navbar: React.FC = () => (
         <span className="sop-navbar-highlight">track</span>, and{' '}
         <span className="sop-navbar-highlight">master</span> your Standard Operating Procedures.
       </p>
-      {/* {NAVIGATION LINKS BELOW} */}
-      <div className="sop-navbar-links" style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1.5rem', zIndex: 1, position: 'relative' }}>
-        <Link to="/" className="sop-navbar-link sop-navbar-highlight" style={{ textDecoration: 'none', fontWeight: 600 }}>
+      {/* NAVIGATION LINKS BELOW */}
+      <div className="sop-navbar-links">
+        <Link to="/" className="sop-navbar-link sop-navbar-highlight">
           My SOPs
         </Link>
-        <span className="sop-navbar-link" style={{ color: '#fff', fontWeight: 600, cursor: 'pointer', opacity: 0.8 }}>
+        <span className="sop-navbar-link">
           SOPs
         </span>
-        <span className="sop-navbar-link" style={{ color: '#fff', fontWeight: 600, cursor: 'pointer', opacity: 0.8 }}>
+        <span className="sop-navbar-link">
           Support
         </span>
       </div>

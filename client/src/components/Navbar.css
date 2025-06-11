@@ -52,3 +52,31 @@
   border-radius: 50%;
   z-index: 0;
 }
+
+.sop-navbar-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  z-index: 1;
+  position: relative;
+}
+
+.sop-navbar-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.sop-navbar-link.sop-navbar-highlight {
+  color: #ffd700;
+  opacity: 1;
+}
+
+.sop-navbar-link:hover {
+  opacity: 1;
+  color: #ffd700;
+}
