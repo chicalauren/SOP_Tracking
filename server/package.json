@@ -6,6 +6,7 @@
     "seed": "ts-node src/seed.ts"
   },
   "dependencies": {
+    "@apollo/server": "^4.12.2",
     "apollo-server-express": "^3.13.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

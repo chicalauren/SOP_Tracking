@@ -1,18 +1,53 @@
-import app, { startApolloServer } from './app';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import express from "express";
+import path from "path";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import dotenv from "dotenv";
+import connectDB from "./config/connection";
+import typeDefs from "./schemas/typeDefs";
+import { resolvers } from "./schemas/resolvers";
+import { authMiddleware } from "./utils/auth";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI as string;
+const app = express();
+const PORT = process.env.PORT || 4000;
+const JWT_SECRET = process.env.JWT_SECRET || "";
 
-mongoose.connect(MONGO_URI)
-  .then(async () => {
-    console.log(' Connected to MongoDB');
-    await startApolloServer(); // Start Apollo Server before listening
-    app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
-  })
-  .catch(err => {
-    console.error(' MongoDB connection error:', err);
+async function startApolloServer() {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
   });
+
+  await server.start();
+
+  app.use(express.json());
+
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: authMiddleware as any,
+    })
+  );
+
+  await connectDB();
+  // if we're in production, serve client/dist as static assets
+  if (process.env.NODE_ENV === "production") {
+    const __dirname = path.resolve(); // root: /opt/render/project/src
+    const clientPath = path.join(__dirname, "client", "dist");
+
+    app.use(express.static(clientPath));
+
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(clientPath, "index.html"));
+    });
+  }
+
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/graphql`);
+  });
+}
+
+startApolloServer();
+//ADDING THIS COMMENT TO COMMIT IT DEPLOYED TO RENDER
