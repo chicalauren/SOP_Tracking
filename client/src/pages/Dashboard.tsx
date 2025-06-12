@@ -1,15 +1,22 @@
-import { useEffect, useState } from 'react';
+import {useQuery, gql} from '@apollo/client';
 import Navbar from '../components/Navbar';
 
+const GET_SOPS = gql`
+  query GetSops {
+    sops {
+      id
+      title
+      version
+    }
+  }
+`;
+
 function Dashboard() {
-  const [sops, setSops] = useState([]);
   const role = (localStorage.getItem('role') as 'User' | 'Reporter' | 'Auditor' | 'Administrator') || 'User';
 
-  useEffect(() => {
-    fetch('/api/sops')
-      .then(res => res.json())
-      .then(data => setSops(data));
-  }, []);
+ const { data } = useQuery(GET_SOPS);
+
+  const sops = data?.sops || [];
 
   return (
     <div

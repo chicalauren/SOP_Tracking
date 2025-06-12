@@ -1,4 +1,4 @@
-import app from './app';
+import app, { startApolloServer } from './app';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -8,8 +8,9 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI as string;
 
 mongoose.connect(MONGO_URI)
-  .then(() => {
+  .then(async () => {
     console.log(' Connected to MongoDB');
+    await startApolloServer(); // Start Apollo Server before listening
     app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
   })
   .catch(err => {
