@@ -17,6 +17,8 @@ function AuthPage() {
       if (res.token) {
         localStorage.setItem('token', res.token);
         setSuccess('Logged in!');
+        // Redirect to home or dashboard
+        window.location.href = '/dashboard';
       } else {
         setError(res.message || 'Login failed');
       }
