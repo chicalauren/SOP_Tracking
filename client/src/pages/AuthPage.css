@@ -33,3 +33,45 @@
   text-align: center;
   margin-bottom: 1.5rem;
 }
+
+.auth-form label {
+  font-weight: 500;
+  color: #1e3c72;
+}
+
+.auth-form .form-control {
+  border-radius: 0.7rem;
+  border: 1px solid #c3cfe2;
+  margin-bottom: 1rem;
+}
+
+.auth-btn {
+  border-radius: 0.8rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #1e3c72 0%, #2575fc 100%);
+  border: none;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.auth-btn:hover {
+  background: linear-gradient(90deg, #2575fc 0%, #1e3c72 100%);
+}
+
+.auth-toggle-btn {
+  color: #2575fc;
+  font-weight: 500;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.auth-alert {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
