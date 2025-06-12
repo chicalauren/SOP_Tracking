@@ -3,6 +3,7 @@ import Dashboard from './pages/Dashboard';
 import SopDetail from './pages/SopDetail';
 import QuizPage from './pages/QuizPage';
 import AuthPage from './pages/AuthPage';
+import EmployeesPage from './pages/EmployeesPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/sop/:id' element={<SopDetail />} />
         <Route path='/sop/:id/quiz' element={<QuizPage />} />
+        <Route path='/employees' element={<EmployeesPage />} />
       </Routes>
     </Router>
   );

@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ role = 'User' }) => {
         </p>
         <div className="sop-navbar-row">
           <div className="sop-navbar-links">
-            <Link to="/" className="sop-navbar-link sop-navbar-highlight">
+            <Link to="/dashboard" className="sop-navbar-link sop-navbar-highlight">
               My SOPs
             </Link>
             <span className="sop-navbar-link">SOPs</span>
@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ role = 'User' }) => {
             )}
             {role === 'Administrator' && (
               <>
-                <span className="sop-navbar-link">Employees</span>
+                <Link to="/employees" className="sop-navbar-link">Employees</Link>
                 <span className="sop-navbar-link">Manage Groups</span>
                 <span className="sop-navbar-link">Reports</span>
                 <span className="sop-navbar-link">Configuration</span>
