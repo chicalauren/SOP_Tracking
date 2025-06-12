@@ -15,7 +15,12 @@ export const loginUser = async (email: string, password: string) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
-  return await res.json();
+  const data = await res.json();
+  if (data.token) {
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('role', data.role);
+  }
+  return data;
 };
 
 export const getAuthHeaders = () => {

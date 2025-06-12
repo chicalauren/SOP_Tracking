@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 
 function Dashboard() {
   const [sops, setSops] = useState([]);
+  const role = (localStorage.getItem('role') as 'User' | 'Reporter' | 'Auditor' | 'Administrator') || 'User';
 
   useEffect(() => {
     fetch('/api/sops')
@@ -17,7 +18,7 @@ function Dashboard() {
         background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
       }}
     >
-      <Navbar />
+      <Navbar role={role} />
       <div className="container">
         <h2 className="mb-4 text-primary fw-bold" style={{ letterSpacing: 1 }}>
           <span role="img" aria-label="book">📚</span> Available SOPs
