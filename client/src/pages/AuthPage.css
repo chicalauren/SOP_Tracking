@@ -1,0 +1,35 @@
+.auth-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(30,60,114,0.10);
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1e3c72;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.auth-subtitle {
+  font-size: 1.1rem;
+  color: #2575fc;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}

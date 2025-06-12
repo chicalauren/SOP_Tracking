@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loginUser, registerUser } from '../services/api';
+import './AuthPage.css';
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,7 +19,6 @@ function AuthPage() {
         if (res.token) {
           localStorage.setItem('token', res.token);
           setSuccess('Logged in!');
-          // Optionally redirect here
         } else {
           setError(res.message || 'Login failed');
         }
@@ -37,10 +37,15 @@ function AuthPage() {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', background: '#f5f7fa' }}>
-      <div className="card shadow p-4" style={{ minWidth: 320, maxWidth: 400 }}>
-        <h2 className="mb-3 text-center">{isLogin ? 'Login' : 'Register'}</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="auth-bg">
+      <div className="auth-card position-relative">
+        <div className="auth-circle auth-circle-left"></div>
+        <div className="auth-circle auth-circle-right"></div>
+        <h2 className="auth-title">{isLogin ? 'Login' : 'Register'}</h2>
+        <div className="auth-subtitle">
+          Welcome to <span style={{ color: '#ffd700', fontWeight: 600 }}>SOP Tracker</span>
+        </div>
+        <form onSubmit={handleSubmit} className="auth-form">
           <div className="mb-3">
             <label>Email</label>
             <input type="email" className="form-control" value={email}
@@ -51,14 +56,18 @@ function AuthPage() {
             <input type="password" className="form-control" value={password}
               onChange={e => setPassword(e.target.value)} required />
           </div>
-          {error && <div className="alert alert-danger py-1">{error}</div>}
-          {success && <div className="alert alert-success py-1">{success}</div>}
-          <button className="btn btn-primary w-100" type="submit">
+          {error && <div className="auth-alert alert alert-danger">{error}</div>}
+          {success && <div className="auth-alert alert alert-success">{success}</div>}
+          <button className="auth-btn btn w-100" type="submit">
             {isLogin ? 'Login' : 'Register'}
           </button>
         </form>
-        <div className="text-center mt-3">
-          <button className="btn btn-link p-0" onClick={() => { setIsLogin(!isLogin); setError(''); setSuccess(''); }}>
+        <div className="text-center">
+          <button
+            className="auth-toggle-btn"
+            onClick={() => { setIsLogin(!isLogin); setError(''); setSuccess(''); }}
+            type="button"
+          >
             {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
           </button>
         </div>
