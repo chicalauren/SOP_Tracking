@@ -1,14 +1,38 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from "mongoose";
 
-const sopSchema = new mongoose.Schema(
-  {
-    title: { type: String, required: true },
-    version: { type: String, required: true },
-    category: { type: String },
-    fileUrl: { type: String },
-    owner: { type: String },
+export interface ISOP extends Document {
+  title: string;
+  content: string;
+  priority: "low" | "medium" | "high";
+  status: "draft" | "published" | "archived" | "completed";
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy?: string;
+  updatedBy?: string;
+}
+
+const sopSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  priority: {
+    type: String,
+    enum: ["low", "medium", "high"],
+    default: "medium",
   },
-  { timestamps: true }
-);
+  status: {
+    type: String,
+    enum: ["draft", "published", "archived", "completed"],
+    default: "draft",
+  },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  createdBy: { type: String },
+  updatedBy: { type: String },
+});
 
-export default mongoose.model('Sop', sopSchema);
+sopSchema.pre("save", function (next) {
+  this.updatedAt = new Date();
+  next();
+});
+
+export const SOP = mongoose.model<ISOP>("SOP", sopSchema);
