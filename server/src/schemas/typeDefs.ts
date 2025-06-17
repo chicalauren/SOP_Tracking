@@ -9,6 +9,8 @@ const typeDefs = gql`
     status: String!
     createdAt: String!
     updatedAt: String!
+    createdBy: String
+    updatedBy: String
   }
   type User {
     _id: ID!
@@ -30,6 +32,10 @@ const typeDefs = gql`
       content: String
       priority: String
       status: String
+      createdBy: String
+      updatedBy: String
+      createdAt: String
+      updatedAt: String
     ): SOP!
     deleteSOP(_id: ID!): Boolean!
     updateUserRole(userId: ID!, role: String!): User!
