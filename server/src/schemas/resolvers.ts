@@ -35,17 +35,6 @@ const resolvers: IResolvers = {
     ): Promise<ISOP | null> => {
       return await SOP.findById(id);
     },
-    updateUserRole: async (_parent, { userId }, context: Context) => {
-      // Check if the logged-in user is an admin
-      if (!context.user || context.user.role !== "Administrator") {
-        throw new Error("Not authorized");
-      }
-      const user = await User.findById(userId);
-      if (!user) {
-        throw new Error("User not found");
-      }
-      return user;
-    },
   },
 
   Mutation: {
@@ -95,6 +84,7 @@ const resolvers: IResolvers = {
       const deleted = await SOP.findByIdAndDelete(id);
       return deleted !== null;
     },
+
     updateUserRole: async (_parent, { userId, role }, context) => {
       // Check if the logged-in user is an admin
       if (!context.user || context.user.role !== "Administrator") {

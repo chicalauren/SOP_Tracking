@@ -5,14 +5,13 @@ import { expressMiddleware } from "@apollo/server/express4";
 import dotenv from "dotenv";
 import connectDB from "./config/connection";
 import typeDefs from "./schemas/typeDefs";
-import { resolvers } from "./schemas/resolvers";
+import resolvers from "./schemas/resolvers";
 import { authMiddleware } from "./utils/auth";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const JWT_SECRET = process.env.JWT_SECRET || "";
 
 async function startApolloServer() {
   const server = new ApolloServer({
@@ -21,20 +20,23 @@ async function startApolloServer() {
   });
 
   await server.start();
+  await connectDB();
 
   app.use(express.json());
 
+  // ✅ Apply the GraphQL middleware and pass auth context
   app.use(
     "/graphql",
     expressMiddleware(server, {
-      context: authMiddleware as any,
+      context: async ({ req }) => {
+        return await authMiddleware({ req });
+      },
     })
   );
 
-  await connectDB();
-  // if we're in production, serve client/dist as static assets
+  // ✅ Serve static client assets in production
   if (process.env.NODE_ENV === "production") {
-    const __dirname = path.resolve(); // root: /opt/render/project/src
+    const __dirname = path.resolve();
     const clientPath = path.join(__dirname, "client", "dist");
 
     app.use(express.static(clientPath));
@@ -45,9 +47,8 @@ async function startApolloServer() {
   }
 
   app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/graphql`);
+    console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
   });
 }
 
 startApolloServer();
-//ADDING THIS COMMENT TO COMMIT IT DEPLOYED TO RENDER
