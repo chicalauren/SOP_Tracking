@@ -1,10 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import { ApolloServer } from 'apollo-server-express';
-import { typeDefs } from './graphql/schema';
-import { resolvers } from './graphql/resolvers';
-import sopRoutes from './routes/sopRoutes';
-import authRoutes from './routes/authRoutes';
+import express from "express";
+import cors from "cors";
+import { ApolloServer } from "apollo-server-express";
+import typeDefs from "./schemas/typeDefs";
+import resolvers from "./schemas/resolvers";
+import sopRoutes from "./routes/sopRoutes";
+import authRoutes from "./routes/authRoutes";
 
 const app: express.Application = express();
 
@@ -13,12 +13,12 @@ app.use(cors());
 app.use(express.json());
 
 // REST API Routes
-app.use('/api/sops', sopRoutes);
-app.use('/api/auth', authRoutes);
+app.use("/api/sops", sopRoutes);
+app.use("/api/auth", authRoutes);
 
 // Root route
-app.get('/', (_req, res) => {
-  res.send('SOP Tracking API is live');
+app.get("/", (_req, res) => {
+  res.send("SOP Tracking API is live");
 });
 
 // Apollo Server setup
@@ -33,4 +33,3 @@ export const startApolloServer = async () => {
 };
 
 export default app;
-

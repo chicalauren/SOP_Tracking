@@ -7,6 +7,8 @@ import connectDB from "./config/connection";
 import typeDefs from "./schemas/typeDefs";
 import resolvers from "./schemas/resolvers";
 import { authMiddleware } from "./utils/auth";
+import cors from "cors";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -21,9 +23,14 @@ async function startApolloServer() {
 
   await server.start();
   await connectDB();
-
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    })
+  );
   app.use(express.json());
-
+  app.use("/api/auth", authRoutes);
   // ✅ Apply the GraphQL middleware and pass auth context
   app.use(
     "/graphql",
